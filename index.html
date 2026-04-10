@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="oota Ai — Intelligent Thali Analyzer. AI-powered nutritional analysis for Indian home-cooked meals with regional health profiles and smart food swaps.">
+  <title>oota Ai — Intelligent Thali Analyzer</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🍛</text></svg>">
+</head>
+<body>
+
+  <!-- ======== HEADER ======== -->
+  <header class="header" id="header">
+    <div class="header-left">
+      <a href="#" class="logo" id="logo">
+        <div class="logo-icon">🍛</div>
+        <span class="logo-text">oota</span>
+        <span class="logo-suffix">Ai</span>
+      </a>
+      <nav class="header-nav" id="main-nav">
+        <a href="#" class="nav-pill active" data-page="dashboard" id="nav-dashboard">Dashboard</a>
+        <a href="#" class="nav-pill" data-page="log" id="nav-log">Meal Log</a>
+        <a href="#" class="nav-pill" data-page="insights" id="nav-insights">Insights</a>
+        <a href="#" class="nav-pill" data-page="goals" id="nav-goals">Goals</a>
+      </nav>
+    </div>
+    <div class="header-right">
+      <div class="header-search" id="header-search">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        <input type="text" placeholder="Search foods..." id="search-input">
+      </div>
+      <div class="region-chip" id="region-chip" title="Change region">
+        <span id="chip-emoji">🏔️</span>
+        <span id="chip-text">North India</span>
+      </div>
+      <button class="icon-btn" id="notif-btn" aria-label="Notifications">
+        <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
+        <div class="badge"></div>
+      </button>
+      <div class="user-pill" id="user-pill">
+        <div class="user-avatar">MS</div>
+        <span class="user-name">Manish</span>
+      </div>
+    </div>
+  </header>
+
+  <!-- ======== APP LAYOUT ======== -->
+  <div class="app-container">
+    <!-- ---- MAIN CONTENT ---- -->
+    <main class="main">
+
+      <!-- Greeting Banner -->
+      <section class="greeting-banner fade-up" id="greeting-banner">
+        <div class="greeting-content">
+          <div class="greeting-hello" id="greeting-hello">Good afternoon</div>
+          <div class="greeting-name">Welcome back, Manish 👋</div>
+          <div class="greeting-streak" id="greeting-streak">🔥 5-day streak! Keep going</div>
+        </div>
+        <div class="greeting-emoji">🍛</div>
+      </section>
+
+      <!-- Stat Cards -->
+      <section class="stat-cards fade-up d1" id="stat-cards">
+        <div class="stat-card" id="card-cal">
+          <div class="stat-card-icon cal">🔥</div>
+          <div class="stat-card-value cal" id="sc-cal">0</div>
+          <div class="stat-card-label">Calories</div>
+          <div class="stat-card-bar"><div class="stat-card-bar-fill cal" id="bar-cal" style="width: 0%"></div></div>
+          <div class="stat-card-target" id="target-cal">Target: 2000 kcal</div>
+        </div>
+        <div class="stat-card" id="card-protein">
+          <div class="stat-card-icon protein">💪</div>
+          <div class="stat-card-value protein" id="sc-protein">0g</div>
+          <div class="stat-card-label">Protein</div>
+          <div class="stat-card-bar"><div class="stat-card-bar-fill protein" id="bar-protein" style="width: 0%"></div></div>
+          <div class="stat-card-target" id="target-protein">Target: 65g</div>
+        </div>
+        <div class="stat-card" id="card-fiber">
+          <div class="stat-card-icon fiber">🌿</div>
+          <div class="stat-card-value fiber" id="sc-fiber">0g</div>
+          <div class="stat-card-label">Fiber</div>
+          <div class="stat-card-bar"><div class="stat-card-bar-fill fiber" id="bar-fiber" style="width: 0%"></div></div>
+          <div class="stat-card-target" id="target-fiber">Target: 30g</div>
+        </div>
+        <div class="stat-card" id="card-water">
+          <div class="stat-card-icon water">💧</div>
+          <div class="stat-card-value water" id="sc-water">0 / 8</div>
+          <div class="stat-card-label">Glasses</div>
+          <div class="stat-card-bar"><div class="stat-card-bar-fill water" id="bar-water" style="width: 0%"></div></div>
+          <div class="stat-card-target">Hydration goal</div>
+        </div>
+      </section>
+
+      <!-- Drop Zone -->
+      <section class="drop-zone-wrapper fade-up d2" id="drop-section">
+        <div class="sec-header">
+          <div class="sec-title">Quick Log</div>
+          <a href="#" class="sec-action" id="history-btn">View History →</a>
+        </div>
+        <div class="drop-zone" id="drop-zone">
+          <div id="dz-default">
+            <div class="dz-icon">📸</div>
+            <div class="dz-title">Snap your Thali</div>
+            <div class="dz-sub">Drag & drop a meal photo — our AI identifies every dish</div>
+            <div class="dz-actions">
+              <button class="btn-upload" id="upload-btn">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+                Upload Photo
+              </button>
+              <button class="btn-camera" id="quick-log-btn">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><line x1="2" y1="10" x2="22" y2="10"/></svg>
+                Quick Add
+              </button>
+            </div>
+            <div class="dz-formats">Supports JPG, PNG, WEBP · Max 10MB</div>
+          </div>
+          <div class="upload-preview" id="upload-preview">
+            <div class="preview-img-wrap">
+              <img id="preview-img" src="" alt="Meal">
+              <div class="preview-overlay"><span class="preview-tag" id="preview-tag">Analyzing...</span></div>
+            </div>
+            <div class="analyzing-bar" id="analyzing-bar">
+              <span>AI identifying your meal</span>
+              <div class="dots"><span></span><span></span><span></span></div>
+            </div>
+          </div>
+          <input type="file" id="file-input" accept="image/*">
+        </div>
+      </section>
+
+      <!-- Health Rings -->
+      <section class="rings-section fade-up d3" id="rings-section">
+        <div class="sec-header">
+          <div class="sec-title">Health Rings</div>
+          <a href="#" class="sec-action">Details →</a>
+        </div>
+        <div class="rings-grid">
+          <div class="ring-card protein">
+            <div class="ring-wrap">
+              <svg class="ring-svg" viewBox="0 0 110 110">
+                <circle class="ring-bg" cx="55" cy="55" r="44"/>
+                <circle class="ring-fill protein" cx="55" cy="55" r="44" stroke-dasharray="276.5" stroke-dashoffset="276.5" id="rf-protein"/>
+              </svg>
+              <div class="ring-center">
+                <div class="ring-val" id="rv-protein">0</div>
+                <div class="ring-unit">/ <span id="rt-protein">65</span>g</div>
+              </div>
+            </div>
+            <div class="ring-label">Protein Gap</div>
+            <div class="ring-sub" id="rs-protein">–</div>
+          </div>
+          <div class="ring-card fiber">
+            <div class="ring-wrap">
+              <svg class="ring-svg" viewBox="0 0 110 110">
+                <circle class="ring-bg" cx="55" cy="55" r="44"/>
+                <circle class="ring-fill fiber" cx="55" cy="55" r="44" stroke-dasharray="276.5" stroke-dashoffset="276.5" id="rf-fiber"/>
+              </svg>
+              <div class="ring-center">
+                <div class="ring-val" id="rv-fiber">0</div>
+                <div class="ring-unit">/ <span id="rt-fiber">30</span>g</div>
+              </div>
+            </div>
+            <div class="ring-label">Fiber Status</div>
+            <div class="ring-sub" id="rs-fiber">–</div>
+          </div>
+          <div class="ring-card carbs">
+            <div class="ring-wrap">
+              <svg class="ring-svg" viewBox="0 0 110 110">
+                <circle class="ring-bg" cx="55" cy="55" r="44"/>
+                <circle class="ring-fill carbs" cx="55" cy="55" r="44" stroke-dasharray="276.5" stroke-dashoffset="276.5" id="rf-carbs"/>
+              </svg>
+              <div class="ring-center">
+                <div class="ring-val" id="rv-carbs">0</div>
+                <div class="ring-unit">%</div>
+              </div>
+            </div>
+            <div class="ring-label">Carb Quality</div>
+            <div class="ring-sub" id="rs-carbs">Complex vs Simple</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Nutrient Breakdown -->
+      <section class="nutrient-section fade-up d4" id="nutrient-section">
+        <div class="sec-header">
+          <div class="sec-title">Nutrient Breakdown</div>
+        </div>
+        <div class="nutrient-bars" id="nutrient-bars">
+          <div class="nutrient-row">
+            <div class="nutrient-icon">🍞</div>
+            <div class="nutrient-info">
+              <div class="nutrient-name-row">
+                <span class="nutrient-name">Carbohydrates</span>
+                <span class="nutrient-amount ok" id="nb-carbs">0g</span>
+              </div>
+              <div class="nutrient-bar"><div class="nutrient-bar-fill carb" id="nbf-carbs" style="width:0%"></div></div>
+            </div>
+          </div>
+          <div class="nutrient-row">
+            <div class="nutrient-icon">🥩</div>
+            <div class="nutrient-info">
+              <div class="nutrient-name-row">
+                <span class="nutrient-name">Protein</span>
+                <span class="nutrient-amount high" id="nb-protein">0g</span>
+              </div>
+              <div class="nutrient-bar"><div class="nutrient-bar-fill prot" id="nbf-protein" style="width:0%"></div></div>
+            </div>
+          </div>
+          <div class="nutrient-row">
+            <div class="nutrient-icon">🧈</div>
+            <div class="nutrient-info">
+              <div class="nutrient-name-row">
+                <span class="nutrient-name">Fat</span>
+                <span class="nutrient-amount ok" id="nb-fat">0g</span>
+              </div>
+              <div class="nutrient-bar"><div class="nutrient-bar-fill fat" id="nbf-fat" style="width:0%"></div></div>
+            </div>
+          </div>
+          <div class="nutrient-row">
+            <div class="nutrient-icon">🌈</div>
+            <div class="nutrient-info">
+              <div class="nutrient-name-row">
+                <span class="nutrient-name">Vitamins & Minerals</span>
+                <span class="nutrient-amount ok" id="nb-vit">Fair</span>
+              </div>
+              <div class="nutrient-bar"><div class="nutrient-bar-fill vit" id="nbf-vit" style="width:0%"></div></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Weekly Chart -->
+      <section class="weekly-section fade-up d5" id="weekly-section">
+        <div class="sec-header">
+          <div class="sec-title">Weekly Trend</div>
+        </div>
+        <div class="weekly-chart">
+          <div class="chart-header">
+            <div class="chart-title">Calorie Intake</div>
+            <div class="chart-tabs">
+              <div class="chart-tab active" data-type="cal">Calories</div>
+              <div class="chart-tab" data-type="protein">Protein</div>
+              <div class="chart-tab" data-type="fiber">Fiber</div>
+            </div>
+          </div>
+          <div class="chart-bars" id="chart-bars">
+            <!-- JS rendered -->
+          </div>
+        </div>
+      </section>
+
+      <!-- Heatmap -->
+      <section class="heatmap-section fade-up" id="heatmap-section">
+        <div class="sec-header">
+          <div class="sec-title">oota Insights</div>
+        </div>
+        <div class="heatmap-card">
+          <div class="heatmap-head">
+            <div class="heatmap-title">Caloric Balance vs. Activity</div>
+            <div class="hm-legend"><span>Low</span><div class="hm-gradient"></div><span>High</span></div>
+          </div>
+          <div class="heatmap-grid" id="hm-grid"></div>
+          <div class="heatmap-days" id="hm-days"></div>
+        </div>
+      </section>
+
+    </main>
+
+    <!-- ---- SIDEBAR ---- -->
+    <aside class="sidebar" id="sidebar">
+      <!-- Identified Items -->
+      <div class="sidebar-section" id="id-section">
+        <div class="sidebar-title">Identified Items</div>
+        <div class="identified-items" id="id-items">
+          <div class="empty-state" id="id-empty">
+            <div class="empty-icon">🍽️</div>
+            <div class="empty-text">Upload a meal photo to<br>see identified items here</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Ghee Slider -->
+      <div class="sidebar-section" id="ghee-section">
+        <div class="sidebar-title">Ghee / Oil Intensity</div>
+        <div class="ghee-box">
+          <div class="ghee-head">
+            <span class="ghee-label">🧈 Fat Adjustment</span>
+            <span class="ghee-badge" id="ghee-badge">Level 2</span>
+          </div>
+          <input type="range" class="ghee-range" id="ghee-range" min="0" max="5" value="2" step="1">
+          <div class="ghee-marks"><span>Dry</span><span>Light</span><span>Medium</span><span>Rich</span><span>Heavy</span><span>Extra</span></div>
+        </div>
+      </div>
+
+      <!-- Water Tracker -->
+      <div class="sidebar-section" id="water-section">
+        <div class="sidebar-title">Water Tracker</div>
+        <div class="water-tracker">
+          <div class="water-title">💧 Stay Hydrated</div>
+          <div class="water-glasses" id="water-glasses">
+            <!-- 8 glasses rendered by JS -->
+          </div>
+          <div class="water-count" id="water-count">0 / 8 glasses</div>
+        </div>
+      </div>
+
+      <!-- Meal Timeline -->
+      <div class="sidebar-section" id="timeline-section">
+        <div class="sidebar-title">Today's Timeline</div>
+        <div class="meal-timeline" id="meal-timeline">
+          <div class="empty-state" id="tl-empty">
+            <div class="empty-text" style="font-size:12px;color:#bbb;">No meals logged today</div>
+          </div>
+        </div>
+      </div>
+    </aside>
+  </div>
+
+  <!-- ======== SMART SWAP TICKER ======== -->
+  <footer class="ticker-footer" id="ticker-footer">
+    <div class="ticker-label"><span>💡</span> Smart Swaps</div>
+    <div class="ticker-track" id="ticker-track"></div>
+  </footer>
+
+  <!-- ======== MOBILE NAV ======== -->
+  <nav class="mobile-nav" id="mobile-nav">
+    <div class="mobile-nav-items">
+      <a href="#" class="mobile-nav-item active" data-page="dashboard">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
+        <span>Home</span>
+      </a>
+      <a href="#" class="mobile-nav-item" data-page="log">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg>
+        <span>Log</span>
+      </a>
+      <a href="#" class="mobile-nav-item" data-page="insights">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0z"/><path d="M12 8v4l3 3"/></svg>
+        <span>Insights</span>
+      </a>
+      <a href="#" class="mobile-nav-item" data-page="profile">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+        <span>Profile</span>
+      </a>
+    </div>
+  </nav>
+
+  <!-- ======== ONBOARDING MODAL ======== -->
+  <div class="modal-bg" id="onboarding-modal">
+    <div class="modal-box">
+      <div class="modal-header">
+        <div class="modal-title-text">Welcome to oota Ai 🍛</div>
+        <div class="modal-subtitle">Select your home region to personalize your nutritional targets</div>
+      </div>
+      <div class="region-grid" id="region-grid"></div>
+      <div class="modal-footer">
+        <button class="btn-start" id="start-btn" disabled>
+          Start My Journey
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
